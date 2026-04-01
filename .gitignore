@@ -1,0 +1,55 @@
+# --- Python Junk ---
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Jupyter Notebook Junk ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+# Optional: Ignore notebook autosave files
+.virtual_documents/
+
+# --- Environment & Dependencies ---
+.venv/
+venv/
+ENV/
+env/
+.env
+# Ignore the large unsloth_compiled_kernels if you ever run locally
+unsloth_compiled_kernels/
+
+# --- ML Specifics ---
+# Ignore large model weights (don't push 15GB files to GitHub!)
+*.pt
+*.pth
+*.bin
+*.gguf
+*.safetensors
+# Ignore local datasets if they are huge
+data/
+*.csv
+*.jsonl
+
+# --- OS Junk ---
+.DS_Store
+Thumbs.db
+
+# --- Editor Junk ---
+.vscode/
+.idea/
