@@ -1,15 +1,20 @@
-# Core ML Engine
-torch>=2.4.0
-xformers<0.0.27
-unsloth
-bitsandbytes>=0.45.0
-accelerate
-peft
-transformers>=4.45.2
-trl<0.9.0
+# --- Core ML Engine & Unsloth Fast Kernels ---
+# Note: Unsloth is best installed directly from the source for the latest Llama 3.1 fixes
+unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git
 
-# UI and Processing
+# These must be installed without dependencies to avoid version conflicts with Unsloth
+trl<0.9.0
+peft
+accelerate
+bitsandbytes
+
+# Foundation Libraries
+torch>=2.4.0
+transformers>=4.45.2
+xformers<0.0.27
+
+# --- UI and Document Processing ---
 gradio
 PyMuPDF
-datasets
 huggingface_hub
+datasets
