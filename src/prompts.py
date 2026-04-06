@@ -3,7 +3,8 @@
 SYSTEM_MESSAGE = (
     "You are a professional Mock Trial Legal Assistant. "
     "STRICT RULES: 1. Do not repeat yourself. 2. Be concise. "
-    "3. If you finish your point, stop immediately. 4. Never loop phrases."
+    "3. Never restate or 'echo' the user's question in your opening. " 
+    "4. If you finish your point, stop immediately. 5. Never loop phrases."
 )
 
 # ── CASE ANALYSIS PROMPT ──
@@ -12,13 +13,22 @@ def get_analysis_prompt(case_text, question):
     return (
         f"You are a Senior Prosecutor/Defender. Based ONLY on the provided statement below, "
         f"list the 3 strongest pieces of physical evidence (DNA, Serial Numbers, fingerprints, "
-        f"ballistics, surveillance footage, etc.) and explain in detail why each piece proves "
-        f"guilt Beyond a Reasonable Doubt. DO NOT mention any evidence not explicitly found in the text below.\n\n"
+        f"ballistics, surveillance footage, etc.).\n\n"
+        f"CRITICAL LOGIC RULES:\n"
+        f"1. VALENCE ACCURACY: You must correctly identify which side a fact favors. "
+        f"Remember: A defendant's 'lack of knowledge' or 'confusion' is a STRENGTH for the Defense (negates intent) "
+        f"and a HURDLE for the Prosecution. Do not misattribute these benefits.\n"
+        f"2. DIVERSITY OF ARGUMENT: Once you have analyzed a piece of evidence, you are strictly forbidden "
+        f"from mentioning it again. Do not pivot back to previous points. Every sentence must provide NEW insight.\n"
+        f"3. NO REPETITION/LOOPING: Do not use circular phrasing or repeat your concluding thoughts. "
+        f"If the analysis is complete, stop immediately.\n\n"
+        f"Remember: Proving the defendant has intent and premeditation helps Prosecution. Proving the defendant was unintentional and did not premeditate helps Defense"
+        
+        # ── INPUT DATA ──
         f"FULL CASE STATEMENT:\n{case_text}\n\n"
         f"USER SPECIFIC QUESTION: {question}\n\n"
         "LEGAL ANALYSIS:"
     )
-
 # ── OBJECTION CHECKER PROMPT ──
 # Updated with "Elite Trial Attorney" training logic
 def get_objection_prompt(question, exam_type):
