@@ -6,7 +6,6 @@ from Prompts import get_analysis_prompt, get_objection_prompt, get_witness_promp
 # ── Shared CSS (Custom Design) ───────────────────────────────────────────
 CSS = """
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap');
-
 :root {
     --bg:          #0d0d0f;
     --surface:     #14141a;
@@ -18,13 +17,11 @@ CSS = """
     --text-muted:  #7a7870;
     --accent:      #6b3e26;
 }
-
 body, .gradio-container {
     background: var(--bg) !important;
     font-family: 'Source Serif 4', serif !important;
     color: var(--text) !important;
 }
-
 #header {
     text-align: center;
     padding: 2.5rem 1rem 1.5rem;
@@ -44,7 +41,6 @@ body, .gradio-container {
     font-size: .95rem;
     margin: 0;
 }
-
 .tab-nav button {
     background: var(--surface) !important;
     border: 1px solid var(--border) !important;
@@ -60,7 +56,6 @@ body, .gradio-container {
     color: var(--gold-light) !important;
     border-bottom-color: var(--surface2) !important;
 }
-
 textarea, input[type=text], .gr-input {
     background: var(--surface2) !important;
     border: 1px solid var(--border) !important;
@@ -68,14 +63,12 @@ textarea, input[type=text], .gr-input {
     font-family: 'Source Serif 4', serif !important;
     border-radius: 6px !important;
 }
-
 label span, .gr-form label {
     color: var(--text-muted) !important;
     font-size: .8rem !important;
     text-transform: uppercase;
     letter-spacing: .08em;
 }
-
 button.primary, button[variant=primary], .gr-button-primary {
     background: linear-gradient(135deg, var(--gold) 0%, #a07830 100%) !important;
     border: none !important;
@@ -87,14 +80,12 @@ button.primary, button[variant=primary], .gr-button-primary {
     padding: .6rem 1.6rem !important;
     transition: opacity .2s;
 }
-
 .output-box textarea {
     background: #10101a !important;
     border-color: var(--border) !important;
     color: var(--text) !important;
     line-height: 1.7 !important;
 }
-
 .upload-zone {
     border: 1px dashed var(--border) !important;
     background: var(--surface) !important;
@@ -127,12 +118,12 @@ def witness_simulator(exam_type, witness_type, name, file, question):
     return run_inference_prompt(prompt, temperature=0.7)
 
 # ── Build Interface ───────────────────────────────────────────────────────────
-with gr.Blocks(css=CSS, title="Mock Trial AI") as demo:
+with gr.Blocks(title="Mock Trial AI") as demo:
 
     gr.HTML("""
     <div id="header">
         <h1>⚖️ Mock Trial AI</h1>
-        <p>V3 · Fine-tuned Courtroom Logic · Powered by Groq</p>
+        <p>V3 · Fine-tuned Courtroom Logic · Powered by Llama 3.1 • Optimized via Groq LPU</p>
     </div>
     """)
 
@@ -188,4 +179,9 @@ with gr.Blocks(css=CSS, title="Mock Trial AI") as demo:
 
 # ── Launch ────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(
+        server_name="0.0.0.0", 
+        server_port=7860, 
+        css=CSS, 
+        footer_links=["gradio", "settings"] 
+    )
